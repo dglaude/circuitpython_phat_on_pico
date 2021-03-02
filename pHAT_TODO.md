@@ -8,6 +8,5 @@
 * Pimoroni Unicorn HAT HD:
 * ANAVI Play pHAT:
 * Pimoroni DiplayoTron HAT:
-* Adafruit MiniPiTFT 1.3'' 240x240 TFT:
 * Waveshare 1.44 inch LCD HAT 128x128 (+ button):
 * Pimoroni BLINKT!
