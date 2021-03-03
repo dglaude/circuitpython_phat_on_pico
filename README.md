@@ -20,3 +20,14 @@ Pin mapping for "Pico to Zero adaptor v0.2":
 * GPIO  6 = pin 31 = Key 3 => GP11
 
 Example code: keybow_mini.py
+
+# Adafruit MiniPiTFT 1.3'' 240x240 TFT
+
+Pin definition for "Pico to Zero adaptor v0.2":
+* bt_up = board.GP27
+* bt_down = board.GP26
+* tft_cs = board.GP5
+* tft_dc = board.GP22
+* spi_mosi = board.GP3
+* spi_clk = board.GP2
+
