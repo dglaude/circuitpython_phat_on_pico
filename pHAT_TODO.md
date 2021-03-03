@@ -10,3 +10,15 @@
 * Pimoroni DiplayoTron HAT:
 * Waveshare 1.44 inch LCD HAT 128x128 (+ button):
 * Pimoroni BLINKT!
+
+New:
+
+* ANAVI Infrared pHAT
+* Adafruit Braincraft
+* Pimoroni Rainbow HAT
+* Pimoroni Phat DAC
+* Raspberry Pi Sense HAT v1.0
+* Pimoroni Explorer HAT pro
+* Pimoroni Explorer pHAT
+* The PiHUT Zeroseg
+
