@@ -19,12 +19,12 @@
 * Pimoroni Explorer HAT pro
 * Pimoroni Explorer pHAT
 * Adafruit Braincraft:
-** LCD screen 240x240
-** Backlight(?)
-** Joystic and button
-** Dotstar
-** I2S out
-** Audio in (mic)
-** Fan control
+ * LCD screen 240x240
+ * Backlight(?)
+ * Joystic and button
+ * Dotstar
+ * I2Sout
+ * Fan control
+ * I2Sin (not supported)
 * Pimoroni Rainbow HAT
 * Raspberry Pi Sense HAT v1.0
