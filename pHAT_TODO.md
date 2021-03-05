@@ -1,30 +1,28 @@
 # List of possible pHAT to use on Pico/RP2040 + Zero adaptation or with Zero pinout
 
-* Pimoroni LED SHIM: https://pinout.xyz/pinout/led_shim
+* ANAVI Play pHAT:
 * Adafruit Joy Bonnet:
-* Pimoroni Scroll pHAT HD:
 * Pimoroni Scroll pHAT:
+* Pimoroni Scroll pHAT HD:
 * Pimoroni Unicorn HAT:
 * Pimoroni Unicorn HAT HD:
-* ANAVI Play pHAT:
-* Pimoroni DiplayoTron HAT:
-* Waveshare 1.44 inch LCD HAT 128x128 (+ button):
 * Pimoroni BLINKT!
-* ANAVI Infrared pHAT
-* Pimoroni Phat DAC
+* Pimoroni LED SHIM: https://pinout.xyz/pinout/led_shim
 * The PiHUT Zeroseg
 
 # Multi-function board
 
+* Pimoroni DiplayoTron HAT:
+* Waveshare 1.44 inch LCD HAT 128x128 (+ button):
 * Pimoroni Explorer HAT pro
 * Pimoroni Explorer pHAT
-* Adafruit Braincraft:
- * LCD screen 240x240
- * Backlight(?)
- * Joystic and button
- * Dotstar
- * I2Sout
- * Fan control
- * I2Sin (not supported)
 * Pimoroni Rainbow HAT
 * Raspberry Pi Sense HAT v1.0
+
+# IR is not supported on RP2040 with CircuitPython
+
+* ANAVI Infrared pHAT
+
+# Will not work with Pico to Zero adapter from Red Robotics
+
+* Pimoroni Phat DAC
