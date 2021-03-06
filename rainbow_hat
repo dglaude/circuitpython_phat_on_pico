@@ -1,0 +1,105 @@
+# some code from https://gist.github.com/dglaude/c2c62f2340e9ab914c41b49e640b9856
+# CircuitPython demo - Dotstar + Led Animation + 14 Segments
+
+import time
+import board
+import busio
+import simpleio
+import digitalio
+import adafruit_bmp280
+import adafruit_dotstar
+
+from adafruit_ht16k33.segments import Seg14x4
+from adafruit_led_animation.animation.comet import Comet
+from adafruit_led_animation.color import RED
+
+"""
+GPIO  2 = GP20 ( 3) : SDA
+GPIO  3 = GP21 ( 5) : SCL
+GPIO 10 = GP3  (19) : MOSI
+GPIO  9 = GP4  (21) : MISO
+GPIO 11 = GP2  (23) : SCLK
+(24) GPIO  8 = GP5  : CE0
+GPIO  6 = GP11 (31) : RED/LEFT LED
+GPIO 13 = GP12 (33) : BUZZER
+GPIO 19 = GP13 (35) : GREEN/MIDDLE LED
+(36) GPIO 16 = GP7  : TOUCH C
+GPIO 26 = GP14 (37) : BLUE/RIGHT LED
+(38) GPIO 20 = GP6  : TOUCH B
+(40) GPIO 21 = GP5  : TOUCH A
+"""
+
+sda = board.GP20
+scl = board.GP21
+dot_clk = board.GP2
+dot_dat = board.GP3
+a_led = board.GP11
+b_led = board.GP13
+c_led = board.GP14
+
+# Define pin connected to piezo buzzer.
+buzzer = board.GP12
+
+led0 = digitalio.DigitalInOut(a_led)
+led0.direction = digitalio.Direction.OUTPUT
+
+led1 = digitalio.DigitalInOut(b_led)
+led1.direction = digitalio.Direction.OUTPUT
+
+led2 = digitalio.DigitalInOut(c_led)
+led2.direction = digitalio.Direction.OUTPUT
+
+led0.value=True
+led1.value=True
+led2.value=True
+time.sleep(1)
+led0.value=False
+led1.value=False
+led2.value=False
+
+i2c = busio.I2C(scl, sda)
+
+bmp280 = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
+
+display = Seg14x4(i2c)
+
+display.brightness = 0.0 # between 0 and 15 with 15 being the brightest.
+
+num_pixels = 7
+pixels = adafruit_dotstar.DotStar(dot_clk, dot_dat, num_pixels, brightness=0.1, auto_write=False)
+
+comet = Comet(pixels, speed=0.1, color=RED, tail_length=3, bounce=True)
+
+led2.value=False
+led0.value=True
+display.print("RED ")
+time.sleep(1)
+led0.value=False
+led1.value=True
+display.print("GREN")
+time.sleep(1)
+led1.value=False
+led2.value=True
+display.print("BLUE")
+time.sleep(1)
+
+led2.value=False
+
+display.print("BUZZ")
+
+for f in (262, 294, 330, 349, 392, 440, 494, 523):
+    simpleio.tone(buzzer, f, 0.25)
+time.sleep(1)
+
+display.print("PICO")
+
+while True:
+    for i in range(15):
+        display.brightness = (1.0 / 16) * (i+1)
+        comet.animate()
+        time.sleep(0.1)
+    for i in range(15):
+        display.brightness = (1.0 / 16) * (16-i)
+        comet.animate()
+        time.sleep(0.1)
+    display.print("%0.1fC" % bmp280.temperature)
