@@ -64,6 +64,7 @@ display = adafruit_st7789.ST7789(
     rowstart=80,
     colstart=0,
     rotation=180,
+    auto_refresh=False
 )
 
 number_of_colors = 64  # Number of color in the gradian
@@ -113,6 +114,7 @@ MakeHeatMapColor()
 
 # Bitmap for colour coded thermal value
 image_bitmap = displayio.Bitmap(24, 32, number_of_colors)
+
 # Create a TileGrid using the Bitmap and Palette
 image_tile = displayio.TileGrid(image_bitmap, pixel_shader=palette)
 
@@ -168,7 +170,7 @@ while True:
         # these happen, no biggie - retry
         continue
 
-    print("Time for data aquisition: %0.2f s" % (time.monotonic()-stamp))
+#    print("Time for data aquisition: %0.2f s" % (time.monotonic()-stamp))
 
 # Convert in ulab.array, find the min and max and normalize to int from 0 to last_color.
     npframe=ulab.array(frame)
@@ -177,22 +179,21 @@ while True:
     factor=last_color/(max_t-min_t)
     inta=ulab.array((npframe-min_t)*factor,dtype=ulab.int8)
 
-    print("Time plus ulab processing: %0.2f s" % (time.monotonic()-stamp))
-
-
     stamp_copy = time.monotonic()
+##    int_bitmap=inta.reshape((24,32))
     index = 0
     for h in range(24):
         for w in range(32):
+##            image_bitmap[h, w] = int_bitmap[h, w]
+#            image_bitmap[h, w] = inta[w+(h<<5)]
+#            image_bitmap[h, w] = inta[h*32+w]
             image_bitmap[h, w] = inta[index]
             index+=1
-# This is faster than image_bitmap[h, w] = inta[h*32+w]
-    print("Copy from uLab to bitmap: %0.2f s" % (time.monotonic()-stamp_copy))
 
-
-#    print("Time plus copy: %0.2f s" % (time.monotonic()-stamp))
+    print("Time copy: %0.2f s" % (time.monotonic()-stamp_copy))
 
     min_label.text = "%0.1f" % (min_t)
     max_label.text = "%0.1f" % (max_t)
 
-    print("Total time for aquisition and display %0.2f s" % (time.monotonic()-stamp))
+    display.refresh()
+#    print("Total time for aquisition and display %0.2f s" % (time.monotonic()-stamp))
